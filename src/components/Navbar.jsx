@@ -1,29 +1,30 @@
-import { Fragment } from 'react'
-import { Disclosure, Menu, Transition } from '@headlessui/react'
-import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
-import { Link, useNavigate } from 'react-router-dom'
-import {useContext} from 'react' 
-import { ContextProvider } from '../context/ContextApp' 
+import { Fragment } from "react";
+import { Disclosure, Menu, Transition } from "@headlessui/react";
+import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { Link, useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { ContextProvider } from "../context/ContextApp";
+import guille from "../assets/Logo_memory_gaming.png";
+
 
 const navigation = [
   // { name: 'Inicio', href: '/', current: true },
   // { name: 'Nosotros', href: '#', current: false },
-]
+];
 
 function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
+  return classes.filter(Boolean).join(" ");
 }
 
-
 export const Navbar = () => {
-  const {userData} = useContext(ContextProvider)
-  const navigate = useNavigate()
-  function closeSession ()  {      
-      navigate("/")
-      localStorage.removeItem("user")
+  const { userData } = useContext(ContextProvider);
+  const navigate = useNavigate();
+  function closeSession() {
+    navigate("/");
+    localStorage.removeItem("user");
   }
   return (
-    <Disclosure as="nav" >
+    <Disclosure as="nav">
       {({ open }) => (
         <>
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -44,14 +45,14 @@ export const Navbar = () => {
                   <a href="/">
                     <img
                       className="block h-10 w-auto lg:hidden"
-                      src="/src/assets/Logo_memory_gaming.png"
-                      alt="Your Company"
+                      src={guille}
+                      alt="Your y"
                     />
                   </a>
                   <a href="/">
                     <img
                       className="hidden h-10 w-auto lg:block"
-                      src="/src/assets/Logo_memory_gaming.png"
+                      src="./src/assets/Logo_memory_gaming.png"
                       alt="Your Company"
                     />
                   </a>
@@ -63,10 +64,12 @@ export const Navbar = () => {
                         key={item.name}
                         href={item.href}
                         className={classNames(
-                          item.current ? 'bg-gray-500 text-white' : 'text-gray-500 hover:bg-gray-700 hover:text-white',
-                          'rounded-md px-3 py-2 text-sm font-medium'
+                          item.current
+                            ? "bg-gray-500 text-white"
+                            : "text-gray-500 hover:bg-gray-700 hover:text-white",
+                          "rounded-md px-3 py-2 text-sm font-medium"
                         )}
-                        aria-current={item.current ? 'page' : undefined}
+                        aria-current={item.current ? "page" : undefined}
                       >
                         {item.name}
                       </a>
@@ -85,8 +88,7 @@ export const Navbar = () => {
 
                 {/* Profile dropdown */}
                 <Menu as="div" className="relative ml-3">
-                  {
-                    localStorage.getItem("user") === null ?
+                  {localStorage.getItem("user") === null ? (
                     <div>
                       <div>
                         <Menu.Button className="flex rounded-full bg-gray-500 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-500">
@@ -112,8 +114,11 @@ export const Navbar = () => {
                             {({ active }) => (
                               <Link
                                 to="/login"
-                                state={{logged:false}}
-                                className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                                state={{ logged: false }}
+                                className={classNames(
+                                  active ? "bg-gray-100" : "",
+                                  "block px-4 py-2 text-sm text-gray-700"
+                                )}
                               >
                                 Iniciar sesión
                               </Link>
@@ -123,7 +128,10 @@ export const Navbar = () => {
                             {({ active }) => (
                               <a
                                 href="/register"
-                                className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                                className={classNames(
+                                  active ? "bg-gray-100" : "",
+                                  "block px-4 py-2 text-sm text-gray-700"
+                                )}
                               >
                                 Registrarse
                               </a>
@@ -131,8 +139,8 @@ export const Navbar = () => {
                           </Menu.Item>
                         </Menu.Items>
                       </Transition>
-                      </div>
-                    :
+                    </div>
+                  ) : (
                     <div>
                       <div>
                         <Menu.Button className="flex rounded-full bg-gray-500 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-500">
@@ -158,8 +166,11 @@ export const Navbar = () => {
                             {({ active }) => (
                               <Link
                                 to="/dashboard"
-                                state={{logged:true}}
-                                className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                                state={{ logged: true }}
+                                className={classNames(
+                                  active ? "bg-gray-100" : "",
+                                  "block px-4 py-2 text-sm text-gray-700"
+                                )}
                               >
                                 Dashboard
                               </Link>
@@ -169,21 +180,24 @@ export const Navbar = () => {
                             {({ active }) => (
                               <button
                                 onClick={closeSession}
-                                className={classNames(active ? 'bg-gray-100 w-full' : '', 'flex px-4 py-2 text-sm text-gray-700 w-full')}
+                                className={classNames(
+                                  active ? "bg-gray-100 w-full" : "",
+                                  "flex px-4 py-2 text-sm text-gray-700 w-full"
+                                )}
                               >
-                              <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    className="w-5 h-5"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke="currentColor"
-                                    strokeWidth={2}
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  className="w-5 h-5"
+                                  fill="none"
+                                  viewBox="0 0 24 24"
+                                  stroke="currentColor"
+                                  strokeWidth={2}
                                 >
-                                    <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"
-                                    />
+                                  <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"
+                                  />
                                 </svg>
                                 <span className="ml-2">Cerrar sesión</span>
                               </button>
@@ -192,8 +206,8 @@ export const Navbar = () => {
                         </Menu.Items>
                       </Transition>
                     </div>
-                  }
-                </Menu>  
+                  )}
+                </Menu>
               </div>
             </div>
           </div>
@@ -206,10 +220,12 @@ export const Navbar = () => {
                   as="a"
                   href={item.href}
                   className={classNames(
-                    item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                    'block rounded-md px-3 py-2 text-base font-medium'
+                    item.current
+                      ? "bg-gray-900 text-white"
+                      : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                    "block rounded-md px-3 py-2 text-base font-medium"
                   )}
-                  aria-current={item.current ? 'page' : undefined}
+                  aria-current={item.current ? "page" : undefined}
                 >
                   {item.name}
                 </Disclosure.Button>
@@ -219,7 +235,7 @@ export const Navbar = () => {
         </>
       )}
     </Disclosure>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;
